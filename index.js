@@ -26,4 +26,4 @@ setInterval(function() {
   })
   .catch(err => console.log(err));
 
-}, 10000);
+}, 10800000);
