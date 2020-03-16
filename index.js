@@ -10,7 +10,7 @@ const client = new twitter({
 });
 
 setInterval(function() {
-  
+
   // Fetch quotes from API
   fetch("https://tintin-quotes-api.herokuapp.com/quotes/random")
   .then(res => res.json())
@@ -18,8 +18,6 @@ setInterval(function() {
     const quote = res;
 
     const full_tweet = quote.text + "\n\n - " + quote.author;
-
-    console.log(full_tweet);
 
     // If quotes is less than tweet character limit post tweet
 
