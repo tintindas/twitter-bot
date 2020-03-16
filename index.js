@@ -10,12 +10,18 @@ const client = new twitter({
 });
 
 setInterval(function() {
+  
+  // Fetch quotes from API
   fetch("https://tintin-quotes-api.herokuapp.com/quotes/random")
   .then(res => res.json())
   .then(res => {
     const quote = res;
 
     const full_tweet = quote.text + "\n\n - " + quote.author;
+
+    console.log(full_tweet);
+
+    // If quotes is less than tweet character limit post tweet
 
     if (full_tweet.length < 280){
       client.post('statuses/update', {status: full_tweet},  function(error, tweet, response) {
@@ -26,4 +32,32 @@ setInterval(function() {
   })
   .catch(err => console.log(err));
 
-}, 10800000);
+  // Follow everyone that follows bot
+
+  client.get("followers/list", function(error, list, response){
+    if (error) throw error;
+
+    list.users.forEach(user => {
+      if(!user.protected){
+        client.post("friendships/create", {screen_name: user.screen_name}, function(error, friend, response){
+          if (error) throw error;
+        });
+      }
+    });
+  });
+
+}, 1080000);
+
+setInterval(function() {
+
+  client.get("followers/list", function(error, list, response){
+    if (error) throw error;
+
+    list.users.forEach(user => {
+      client.post("friendships/destroy", {screen_name: user.screen_name}, function(error, unfriended, response) {
+        if(error) throw error;
+      })
+    })
+  });
+
+}, 864000000)
