@@ -30,32 +30,5 @@ setInterval(function() {
   })
   .catch(err => console.log(err));
 
-  // Follow everyone that follows bot
-
-  client.get("followers/list", function(error, list, response){
-    if (error) throw error;
-
-    list.users.forEach(user => {
-      if(!user.protected){
-        client.post("friendships/create", {screen_name: user.screen_name}, function(error, friend, response){
-          if (error) throw error;
-        });
-      }
-    });
-  });
 
 }, 10800000);
-
-setInterval(function() {
-
-  client.get("followers/list", function(error, list, response){
-    if (error) throw error;
-
-    list.users.forEach(user => {
-      client.post("friendships/destroy", {screen_name: user.screen_name}, function(error, unfriended, response) {
-        if(error) throw error;
-      })
-    })
-  });
-
-}, 864000000)
