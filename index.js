@@ -44,7 +44,7 @@ setInterval(function() {
     });
   });
 
-}, 1080000);
+}, 10800000);
 
 setInterval(function() {
 
