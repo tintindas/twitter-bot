@@ -24,6 +24,7 @@ setInterval(function() {
     if (full_tweet.length < 280){
       client.post('statuses/update', {status: full_tweet},  function(error, tweet, response) {
         if(error) throw error;
+        console.log("Tweeted: " + full_tweet);
       });
     }
 
