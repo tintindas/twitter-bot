@@ -73,4 +73,4 @@ setInterval(function() {
   .catch(err => console.log(err));
 
 
-}, 60000); //10800000
+}, 10800000); //10800000ms = 3 hours
