@@ -28,8 +28,49 @@ setInterval(function() {
       });
     }
 
+    else{
+
+      const words = full_tweet.split(" ");
+      const quoteFragments = [];
+      let quoteFragment = "";
+
+      words.forEach(word => {
+        quoteFragment += word + " ";
+        if(quoteFragment.length > 200){
+          quoteFragments.push(quoteFragment);
+          quoteFragment=" ";
+        }
+      });
+
+      quoteFragments.push(quoteFragment);
+
+      for(let i=0; i<quoteFragments.length-1; i++){
+        quoteFragments[i] += "....."
+      }
+
+      console.log(quoteFragments);
+
+
+      var prev_id = null;
+
+
+      async function updateFeed(){
+        for (item of quoteFragments){
+          console.log("Previous Tweet ID: " + prev_id);
+          let tweet = await client.post("statuses/update", {status: item, in_reply_to_status_id: prev_id});
+
+          prev_id = tweet.id_str;
+          console.log(tweet.text);
+        }
+
+        console.log("done");
+      }
+
+      updateFeed();
+    }
+
   })
   .catch(err => console.log(err));
 
 
-}, 10800000);
+}, 60000); //10800000
