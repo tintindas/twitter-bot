@@ -24,7 +24,7 @@ fetch('https://tintin-quotes-api.herokuapp.com/quotes/random')
 
 		const full_tweet = `${quoteText}
 
-        - ${author}, ${source}
+        - ${author}${source ? ',' : ''} ${source}
 
 ${hashtags}
         `
