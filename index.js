@@ -15,7 +15,8 @@ const client = new twitter({
 fetch('https://tintin-quotes-api.herokuapp.com/quotes/random')
 	.then((res) => res.json())
 	.then((res) => {
-		const { quoteText, author, source, tags } = res
+		const { quotes } = res
+		const { quoteText, author, source, tags } = quotes[0]
 
 		let hashtags = ``
 		for (let i = 0; i < tags.length; i++) {
