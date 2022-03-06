@@ -15,7 +15,7 @@
   "author": "tintin_das",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
